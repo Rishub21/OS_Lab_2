@@ -39,6 +39,7 @@ public class Solution {
         int time = 0;
         int terminatedCount = 0;
         int unutilized = 0;
+        int unutilizedIO = 0;
         while(terminatedCount < numProcesses){
             if(time < 10000 ){
                 System.out.print("Before Cycle: " + time);
@@ -58,6 +59,8 @@ public class Solution {
 
             Set<Process> newBlockedSet = new HashSet<>();
 
+
+
             for(Process p : blockedSet ){
                 p.ioTime --;
                 if(p.ioTime == 0){
@@ -72,8 +75,9 @@ public class Solution {
 
             blockedSet = newBlockedSet;
 
-
+            boolean hasCurr = false;
             if(curr != null){
+                hasCurr = true;
                 curr.cpuBurst -= 1;
                 curr.cpuTotal -= 1;
                 if(curr.cpuTotal == 0){
@@ -90,6 +94,11 @@ public class Solution {
                     blockedSet.add(curr);
                     curr = null;
                 }
+            }
+
+            if(blockedSet.size() == 0 && time > 0){
+                //System.out.println("NO IO " + time );
+                unutilizedIO ++;
             }
 
 
@@ -115,16 +124,38 @@ public class Solution {
                     int burstTime = randomOS(curr.cpuRandom);
                     curr.prevCPUBurst = burstTime;
                     curr.cpuBurst = burstTime;
-                }else{
+                }
+            }
+            if(time > 0){
+                boolean addOn = false;
+                for(Process p : processList){
+                    if(p.state != State.blocked && p.state != State.unstarted){
+                        addOn = true;
+                    }
+                }
+                if(addOn){
                     unutilized ++;
                 }
             }
             time ++;
         }
-
+        int totalWait = 0;
+        int totalTurn = 0;
         for(Process p : processList){
             System.out.println(p);
+            totalWait +=  (((p.finishingTime - p.arrival) - p.originalCPUTotal) - (p.ioTotal));
+            totalTurn += (p.finishingTime - p.arrival);
         }
+        time -= 1;
+        System.out.println(unutilized + " " + unutilizedIO);
+        System.out.println("Summary Data");
+        System.out.println("Finishing Time : " + time);
+        System.out.println("CPU Utilization: " +  ((time - unutilized) / (float)time));
+        System.out.println("IO Utilization: "  + ((time - unutilizedIO) / (float)time));
+        System.out.println("Throughput: " +  ((100 / (float)time) * processList.size()) + " processes per hundred cycles");
+        System.out.println("Average turn around time : " + (float)totalTurn / processList.size() );
+        System.out.println("Average wait time : " + (float)totalWait / processList.size() );
+
 
 
     }
@@ -141,12 +172,10 @@ public class Solution {
             return null;
         }
     }
-}
 
-class SortByArrival implements Comparator<Process>{
-    @Override
-    public int compare(Process o1, Process o2) {
-        return o1.arrival.compareTo(o2.arrival);
+    public static void printSummary(){
+
+
     }
 }
 
@@ -203,6 +232,5 @@ class Process implements Comparable<Process> {
 }
 
 enum State {
-
     running,ready,blocked,terminated,unstarted;
 }

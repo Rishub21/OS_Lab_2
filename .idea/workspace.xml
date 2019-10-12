@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f4b34ec8-538b-402c-9010-a1baa384bb0b" name="Default Changelist" comment="" />
+    <list default="true" id="f4b34ec8-538b-402c-9010-a1baa384bb0b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/os_lab_2_new/Process.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/os_lab_2_new/Process.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/os_lab_2_new/Solution.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/os_lab_2_new/Solution.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/os_lab_2_new/SortByArrival.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/os_lab_2_new/State.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/os_lab_2_new/State.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Solution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Solution.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -15,8 +23,13 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1S2QdSAjUbcLG0LZOX9du65VMtR" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
@@ -41,7 +54,7 @@
     <configuration name="Solution" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Solution" />
       <module name="os_lab_2_new" />
-      <option name="PROGRAM_PARAMETERS" value="input7.txt" />
+      <option name="PROGRAM_PARAMETERS" value="input2.txt" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -65,12 +78,23 @@
     </task>
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/Solution.java</url>
-          <line>41</line>
+          <line>42</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
