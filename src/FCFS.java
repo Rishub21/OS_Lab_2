@@ -160,6 +160,7 @@ public class FCFS {
         System.out.println(" Throughput: " +  ((100 / (float)time) * processList.size()) + " processes per hundred cycles");
         System.out.println(" Average turn around time : " + (float)totalTurn / processList.size() );
         System.out.println(" Average wait time : " + (float)totalWait / processList.size() );
+        System.out.println();
     }
 
 

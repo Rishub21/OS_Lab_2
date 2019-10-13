@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4b34ec8-538b-402c-9010-a1baa384bb0b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/Solution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Solution.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/os_lab_2_new/Solution.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/os_lab_2_new/Solution.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FCFS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FCFS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/HPRN.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HPRN.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RR.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SJF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SJF.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,7 +53,7 @@
     <configuration name="Solution" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Solution" />
       <module name="os_lab_2_new" />
-      <option name="PROGRAM_PARAMETERS" value="-verbose input4.txt" />
+      <option name="PROGRAM_PARAMETERS" value="-verbose input1.txt" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
