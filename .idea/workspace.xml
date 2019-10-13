@@ -2,22 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4b34ec8-538b-402c-9010-a1baa384bb0b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/os_lab_2_new/FCFS.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/os_lab_2_new/FCFS.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/os_lab_2_new/HPRN.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/os_lab_2_new/HPRN.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/os_lab_2_new/Process.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/os_lab_2_new/Process.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/os_lab_2_new/RR.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/os_lab_2_new/RR.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/os_lab_2_new/SJF.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/os_lab_2_new/SJF.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/os_lab_2_new/SJFComparator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/os_lab_2_new/SJFComparator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/os_lab_2_new/Solution.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/os_lab_2_new/Solution.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/os_lab_2_new/State.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/os_lab_2_new/State.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/os_lab_2_new/fcfsComparator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/os_lab_2_new/fcfsComparator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/os_lab_2_new/hprnComparator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/os_lab_2_new/hprnComparator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/os_lab_2_new/rrComparator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/os_lab_2_new/rrComparator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FCFS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FCFS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/HPRN.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HPRN.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RR.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SJF.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SJF.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Solution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Solution.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
