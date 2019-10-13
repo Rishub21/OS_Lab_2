@@ -4,7 +4,15 @@ import java.io.File;
 public class Solution {
     static Scanner randomScanner;
     public static void main(String [] args){
-        String fileName = args[0];
+        String fileName = "";
+        boolean verbose = false;
+        if(args.length == 1){
+            fileName = args[0];
+        }else{
+            verbose = true;
+            fileName = args[1];
+        }
+
         Scanner sc   = new Scanner(System.in);
 
         try{
@@ -23,27 +31,35 @@ public class Solution {
             int cpuTotal = sc.nextInt();
             int ioMulti = sc.nextInt();
             Process p = new Process(arrival, cpuRandom, cpuTotal, ioMulti, i,State.unstarted);
-
             processList.add(p);
         }
 
-//        FCFS f = new FCFS(processList);
+//        FCFS f = new FCFS(getDeepClone(processList), verbose);
 //        f.Schedule();
-//
-          RR r = new RR(processList);
-          r.Schedule();
 
-//            SJF s = new SJF(processList);
-//            s.Schedule();
-//            HPRN h = new HPRN(processList);
-//            h.Schedule();
+//        RR r = new RR(getDeepClone(processList), verbose);
+//        r.Schedule();
+//
+//        SJF s = new SJF(getDeepClone(processList), verbose);
+//        s.Schedule();
+//
+        HPRN h = new HPRN(getDeepClone(processList), verbose);
+        h.Schedule();
+    }
+
+    public static List<Process> getDeepClone(List<Process> processList) {
+        List<Process> results = new ArrayList<>();
+        for(Process p : processList){
+            results.add((Process)p.clone());
+        }
+        return results;
     }
 }
 
 
 
 
-class Process implements Comparable<Process> {
+class Process implements Comparable<Process>,Cloneable {
     Integer arrival; // this is the original arrival time
     Integer queueArrival; // this is the updated arrival everytime this get back on queue
     Integer cpuRandom;
@@ -85,14 +101,20 @@ class Process implements Comparable<Process> {
 //        }
     }
 
+    public Object clone()  {
+
+        Process p = new Process(this.arrival, this.cpuRandom, this.cpuTotal, this.ioMulti, this.index, this.state);
+        return p;
+    }
+
     public String toString(){
 
         String  processNum = "Process " + this.index + ":" + '\n';
-        String details = "(A,B,C,M) = (" + this.arrival +"," +  this.cpuRandom+ "," + this.originalCPUTotal + "," + this.ioMulti + ")" + '\n';
-        String finishingTime = "Finishing Time : " + this.finishingTime + '\n';
-        String turnAroundTime = "TurnAround Time: " + (this.finishingTime - this.arrival) + '\n' ;
-        String IOTime = "I/O Time: " +  this.ioTotal + '\n' ;
-        String waitingTime = "Waiting Time : " + (((this.finishingTime - this.arrival) - this.originalCPUTotal) - (this.ioTotal)) + '\n';
+        String details = " (A,B,C,M) = (" + this.arrival +"," +  this.cpuRandom+ "," + this.originalCPUTotal + "," + this.ioMulti + ")" + '\n';
+        String finishingTime = " Finishing Time : " + this.finishingTime + '\n';
+        String turnAroundTime = " TurnAround Time: " + (this.finishingTime - this.arrival) + '\n' ;
+        String IOTime = " I/O Time: " +  this.ioTotal + '\n' ;
+        String waitingTime = " Waiting Time : " + (((this.finishingTime - this.arrival) - this.originalCPUTotal) - (this.ioTotal)) + '\n';
         return processNum + details + finishingTime + turnAroundTime + IOTime + waitingTime;
      }
 

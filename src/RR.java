@@ -11,16 +11,37 @@ public class RR {
     Set<Process> blockedSet = new HashSet<>();
     int numProcesses;
     Scanner randomScanner = getRandomFile();
+    boolean verbose;
 
-    public RR (List<Process> processList ){
+    public RR (List<Process> processList, boolean verbose ){
         this.processList = processList;
         this.numProcesses = processList.size();
+        this.verbose = verbose;
+
+        System.out.print("The original input was: ");
+        System.out.print(processList.size());
+        for(Process p : processList){
+            System.out.print( "(" + p.arrival + " " + p.cpuRandom + " " + p.cpuTotal + " " + p.ioMulti  + ") ");
+        }
+        System.out.println();
 
         Collections.sort(processList, new rrComparator());
 
         for(int i = 0 ; i < processList.size(); i ++){
             this.processList.get(i).index = i;
         }
+
+        System.out.print("The (sorted) input is : ");
+        System.out.print(processList.size());
+        for(Process p : processList){
+            System.out.print( "(" + p.arrival + " " + p.cpuRandom + " " + p.cpuTotal + " " + p.ioMulti  + ") ");
+        }
+        System.out.println("\n");
+        if(this.verbose){
+            System.out.println("This detailed printout gives the state and remaining burst for each process\n");
+        }
+
+
 
 
     }
@@ -32,19 +53,20 @@ public class RR {
         int unutilizedIO = 0;
         while(terminatedCount < numProcesses){
 
-            System.out.print("Before Cycle: " + time);
-            for(Process p : processList){
-                System.out.print( " " + p.state + " ");
-                if(p.state == State.blocked){
-                    System.out.print(p.ioTime + " ");
-                }else if(p.state == State.running){
-                    System.out.print(p.quantum + " ");
-                } else{
-                    System.out.print(0 + " ");
+            if(verbose){
+                System.out.print("Before Cycle: " + time);
+                for(Process p : processList){
+                    System.out.print( " " + p.state + " ");
+                    if(p.state == State.blocked){
+                        System.out.print(p.ioTime + " ");
+                    }else if(p.state == State.running){
+                        System.out.print(p.quantum + " ");
+                    } else{
+                        System.out.print(0 + " ");
+                    }
                 }
+                System.out.println();
             }
-            System.out.println();
-
             Set<Process> newBlockedSet = new HashSet<>();
 
             for(Process p : blockedSet ){
@@ -63,9 +85,6 @@ public class RR {
 
             boolean hasCurr = false;
             if(curr != null){
-                if(time <= 15){
-                    System.out.println( curr.index + " " + curr.cpuBurst);
-                }
                 hasCurr = true;
                 curr.cpuBurst -= 1;
                 curr.cpuTotal -= 1;
@@ -111,9 +130,12 @@ public class RR {
                     curr = readyQueue.poll();
                     curr.state = State.running;
 
-                    int burstTime = randomOS(curr.cpuRandom);
-                    curr.prevCPUBurst = burstTime;
-                    curr.cpuBurst = burstTime;
+                    if(curr.cpuBurst == null || curr.cpuBurst == 0){
+                        int burstTime = randomOS(curr.cpuRandom);
+                        curr.prevCPUBurst = burstTime;
+                        curr.cpuBurst = burstTime;
+                    }
+
                     curr.quantum = 2;
                 }
             }
@@ -131,6 +153,7 @@ public class RR {
             time ++;
         }
 
+        System.out.println("The scheduling algorithm used was Round Robin \n");
         summary(time, unutilized, unutilizedIO);
 
     }
@@ -139,20 +162,23 @@ public class RR {
     public void summary(int time, Integer unutilized, Integer unutilizedIO){
         int totalWait = 0;
         int totalTurn = 0;
+        int totalCompute = 0;
         for(Process p : processList){
             System.out.println(p);
             totalWait +=  (((p.finishingTime - p.arrival) - p.originalCPUTotal) - (p.ioTotal));
             totalTurn += (p.finishingTime - p.arrival);
+            totalCompute += p.originalCPUTotal;
+
         }
 
         time -= 1;
         System.out.println("Summary Data");
-        System.out.println("Finishing Time : " + time);
-        System.out.println("CPU Utilization: " +  ((time - unutilized) / (float)time));
-        System.out.println("IO Utilization: "  + ((time - unutilizedIO) / (float)time));
-        System.out.println("Throughput: " +  ((100 / (float)time) * processList.size()) + " processes per hundred cycles");
-        System.out.println("Average turn around time : " + (float)totalTurn / processList.size() );
-        System.out.println("Average wait time : " + (float)totalWait / processList.size() );
+        System.out.println(" Finishing Time : " + time);
+        System.out.println(" CPU Utilization: " +  (totalCompute / (float)time));
+        System.out.println(" IO Utilization: "  + ((time - unutilizedIO) / (float)time));
+        System.out.println(" Throughput: " +  ((100 / (float)time) * processList.size()) + " processes per hundred cycles");
+        System.out.println(" Average turn around time : " + (float)totalTurn / processList.size() );
+        System.out.println(" Average wait time : " + (float)totalWait / processList.size() );
     }
 
 
@@ -170,7 +196,6 @@ public class RR {
         }
     }
 }
-
 
 class rrComparator implements Comparator<Process> {
     public int compare(Process p1, Process p2){
