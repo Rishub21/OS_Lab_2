@@ -27,9 +27,16 @@ public class Solution {
             processList.add(p);
         }
 
-        FCFS f = new FCFS(processList);
-        f.Schedule();
+//        FCFS f = new FCFS(processList);
+//        f.Schedule();
+//
+          RR r = new RR(processList);
+          r.Schedule();
 
+//            SJF s = new SJF(processList);
+//            s.Schedule();
+//            HPRN h = new HPRN(processList);
+//            h.Schedule();
     }
 }
 
@@ -47,8 +54,12 @@ class Process implements Comparable<Process> {
     Integer cpuBurst;
     Integer prevCPUBurst;
     Integer finishingTime;
+    Float hprn = 0.0f;
+
     int ioTotal = 0;
     int originalCPUTotal;
+    int quantum = 0;
+
     State state;
 
 
@@ -65,6 +76,7 @@ class Process implements Comparable<Process> {
 
     public int compareTo(Process other){
         System.out.println("TEST " + other.index);
+
         return -1;
 //                if(this.queueArrival.compareTo(other.queueArrival) == 0){
 //            return this.index.compareTo(other.index);

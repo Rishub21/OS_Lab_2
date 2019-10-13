@@ -2,11 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f4b34ec8-538b-402c-9010-a1baa384bb0b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/FCFS.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/HPRN.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/SJF.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/os_lab_2_new/FCFS.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/os_lab_2_new/FCFS.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/os_lab_2_new/Process.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/os_lab_2_new/Process.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/os_lab_2_new/Solution.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/os_lab_2_new/Solution.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/os_lab_2_new/State.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/os_lab_2_new/State.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/os_lab_2_new/fcfsComparator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/os_lab_2_new/fcfsComparator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FCFS.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FCFS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/RR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/RR.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Solution.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Solution.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -93,7 +98,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/FCFS.java</url>
-          <line>107</line>
+          <line>6</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>

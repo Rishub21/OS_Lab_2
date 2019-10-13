@@ -1,28 +1,24 @@
 import java.io.File;
-import java.util.Comparator;
+import java.util.Scanner;
 import java.util.*;
-import java.io.File;
 
-public class RR {
-
-    PriorityQueue<Process> readyQueue = new PriorityQueue( new fcfsComparator());
+public class HPRN {
+    PriorityQueue<Process> readyQueue = new PriorityQueue( new hprnComparator());
     List<Process>  processList = new ArrayList<>();
     Process curr = null;
     Set<Process> blockedSet = new HashSet<>();
     int numProcesses;
     Scanner randomScanner = getRandomFile();
 
-    public RR (List<Process> processList ){
+    public HPRN(List<Process> processList){
         this.processList = processList;
         this.numProcesses = processList.size();
 
-        Collections.sort(processList, new rrComparator());
+        Collections.sort(processList, new hprnComparator());
 
         for(int i = 0 ; i < processList.size(); i ++){
             this.processList.get(i).index = i;
         }
-
-
     }
 
     public void Schedule(){
@@ -38,12 +34,14 @@ public class RR {
                 if(p.state == State.blocked){
                     System.out.print(p.ioTime + " ");
                 }else if(p.state == State.running){
-                    System.out.print(p.quantum + " ");
+                    System.out.print(p.cpuBurst + " ");
                 } else{
                     System.out.print(0 + " ");
                 }
             }
             System.out.println();
+
+
 
             Set<Process> newBlockedSet = new HashSet<>();
 
@@ -53,6 +51,7 @@ public class RR {
                     p.state = State.ready;
 
                     p.queueArrival = time;
+                    p.hprn = getHPRN(time, p);
                     readyQueue.offer(p);
                 }else{
                     newBlockedSet.add(p);
@@ -63,15 +62,12 @@ public class RR {
 
             boolean hasCurr = false;
             if(curr != null){
-                if(time <= 15){
-                    System.out.println( curr.index + " " + curr.cpuBurst);
-                }
+
+
+
                 hasCurr = true;
                 curr.cpuBurst -= 1;
                 curr.cpuTotal -= 1;
-                curr.quantum -= 1;
-
-
                 if(curr.cpuTotal == 0){
 
                     curr.state = State.terminated;
@@ -85,12 +81,9 @@ public class RR {
                     curr.ioTotal += curr.ioTime;
                     blockedSet.add(curr);
                     curr = null;
-                }else if(curr.quantum == 0){
-                    curr.state = State.ready;
-                    curr.queueArrival = time;
-                    readyQueue.offer(curr);
-                    curr = null;
                 }
+
+
             }
 
             if(blockedSet.size() == 0 && time > 0){
@@ -108,13 +101,26 @@ public class RR {
 
                 if(readyQueue.size() > 0){
 
+
+                    PriorityQueue<Process> tempQueue = new PriorityQueue(new hprnComparator());
+                    while(!readyQueue.isEmpty()){
+                        Process p = readyQueue.poll();
+                        p.hprn = getHPRN(time, p);
+                        tempQueue.offer(p);
+                    }
+                    readyQueue = tempQueue;
+
+                    if(time == 13){
+                        System.out.println(readyQueue.peek().hprn);
+                        System.out.println(processList.get(2).hprn);
+                    }
+
                     curr = readyQueue.poll();
                     curr.state = State.running;
 
                     int burstTime = randomOS(curr.cpuRandom);
                     curr.prevCPUBurst = burstTime;
                     curr.cpuBurst = burstTime;
-                    curr.quantum = 2;
                 }
             }
             if(time > 0){
@@ -134,7 +140,6 @@ public class RR {
         summary(time, unutilized, unutilizedIO);
 
     }
-
 
     public void summary(int time, Integer unutilized, Integer unutilizedIO){
         int totalWait = 0;
@@ -156,7 +161,6 @@ public class RR {
     }
 
 
-
     public  int randomOS(Integer cpuRandom){
         return (1 + (randomScanner.nextInt() % cpuRandom));
     }
@@ -169,15 +173,27 @@ public class RR {
             return null;
         }
     }
+
+    public Float getHPRN(int time, Process p){
+       int num = 1+(time - p.arrival);
+       float denom = Math.max(1,p.originalCPUTotal - p.cpuTotal);
+
+       return num / denom;
+    }
+
 }
 
-
-class rrComparator implements Comparator<Process> {
+class hprnComparator implements Comparator<Process>{
     public int compare(Process p1, Process p2){
-        if(p1.queueArrival.compareTo(p2.queueArrival) == 0){
-            return p1.index.compareTo(p2.index);
+        if(p1.hprn.compareTo(p2.hprn) == 0){
+            if(p1.queueArrival.compareTo(p2.queueArrival) == 0){
+                return p1.index.compareTo(p2.index);
+            }else{
+                return p1.queueArrival.compareTo(p2.queueArrival);
+            }
         }else{
-            return p1.queueArrival.compareTo(p2.queueArrival);
+            return -1 * (p1.hprn.compareTo(p2.hprn));
         }
+
     }
 }

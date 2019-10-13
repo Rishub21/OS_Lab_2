@@ -27,20 +27,20 @@ public class FCFS {
         int unutilized = 0;
         int unutilizedIO = 0;
         while(terminatedCount < numProcesses){
-            if(time < 10000 ){
-                System.out.print("Before Cycle: " + time);
-                for(Process p : processList){
-                    System.out.print( " " + p.state + " ");
-                    if(p.state == State.blocked){
-                        System.out.print(p.ioTime + " ");
-                    }else if(p.state == State.running){
-                        System.out.print(p.cpuBurst + " ");
-                    } else{
-                        System.out.print(0 + " ");
-                    }
+
+            System.out.print("Before Cycle: " + time);
+            for(Process p : processList){
+                System.out.print( " " + p.state + " ");
+                if(p.state == State.blocked){
+                    System.out.print(p.ioTime + " ");
+                }else if(p.state == State.running){
+                    System.out.print(p.cpuBurst + " ");
+                } else{
+                    System.out.print(0 + " ");
                 }
-                System.out.println();
             }
+            System.out.println();
+
 
 
             Set<Process> newBlockedSet = new HashSet<>();
@@ -61,6 +61,11 @@ public class FCFS {
 
             boolean hasCurr = false;
             if(curr != null){
+
+                if(time <= 7){
+                    System.out.println( curr.index + " " + curr.cpuBurst);
+                }
+
                 hasCurr = true;
                 curr.cpuBurst -= 1;
                 curr.cpuTotal -= 1;
@@ -124,16 +129,18 @@ public class FCFS {
     public void summary(int time, Integer unutilized, Integer unutilizedIO){
         int totalWait = 0;
         int totalTurn = 0;
+        int totalCompute = 0;
         for(Process p : processList){
             System.out.println(p);
             totalWait +=  (((p.finishingTime - p.arrival) - p.originalCPUTotal) - (p.ioTotal));
             totalTurn += (p.finishingTime - p.arrival);
+            totalCompute += p.originalCPUTotal;
         }
 
         time -= 1;
         System.out.println("Summary Data");
         System.out.println("Finishing Time : " + time);
-        System.out.println("CPU Utilization: " +  ((time - unutilized) / (float)time));
+        System.out.println("CPU Utilization: " +  ( totalCompute / (float)time));
         System.out.println("IO Utilization: "  + ((time - unutilizedIO) / (float)time));
         System.out.println("Throughput: " +  ((100 / (float)time) * processList.size()) + " processes per hundred cycles");
         System.out.println("Average turn around time : " + (float)totalTurn / processList.size() );
