@@ -5,6 +5,7 @@
 1) Please cd into the folder and into the ```src``` subdirectory 
 2) Please run ```javac Solution.java``` 
 3) Please run either 
+
    a) ```java Solution input.txt```   
    
    Where input.txt is any input that follows the specification of input in the lab specs. This will give the basic simulation output for each scheduling algorithm. 
