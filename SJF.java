@@ -72,9 +72,6 @@ public class SJF {
 
                     p.queueArrival = time;
                     readyQueue.offer(p);
-                    if(time == 4){
-                        System.out.println( p.index);
-                    }
                 }else{
                     newBlockedSet.add(p);
                 }
