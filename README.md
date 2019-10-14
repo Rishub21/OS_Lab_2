@@ -15,4 +15,5 @@
    b) ``` java Solution --verbose input.txt```  
    
    This command will give a more detailed output of the simulation, including the state of every process before each unit of time 
+   
    **Note** the verbose flag comes **before** the input.txt argument.  
