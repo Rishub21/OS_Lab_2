@@ -124,11 +124,6 @@ public class HPRN {
                     }
                     readyQueue = tempQueue;
 
-                    if(time == 13){
-                        System.out.println(readyQueue.peek().hprn);
-                        System.out.println(processList.get(2).hprn);
-                    }
-
                     curr = readyQueue.poll();
                     curr.state = State.running;
 
