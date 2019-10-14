@@ -46,7 +46,7 @@ public class HPRN {
         int unutilizedIO = 0;
         while(terminatedCount < numProcesses){
             if(verbose){
-                System.out.print("Before Cycle: " + time);
+              System.out.print("Before Cycle " + time + ": ");
                 for(Process p : processList){
                     System.out.print( " " + p.state + " ");
                     if(p.state == State.blocked){
@@ -78,6 +78,7 @@ public class HPRN {
             blockedSet = newBlockedSet;
 
             boolean hasCurr = false;
+            boolean currTerminated= false;
             if(curr != null){
                 hasCurr = true;
                 curr.cpuBurst -= 1;
@@ -86,6 +87,7 @@ public class HPRN {
 
                     curr.state = State.terminated;
                     curr.finishingTime = time;
+                    currTerminated = true;
                     terminatedCount ++;
                     curr = null;
                 }else if(curr.cpuBurst == 0 ){
@@ -116,13 +118,18 @@ public class HPRN {
                 if(readyQueue.size() > 0){
 
 
-                    PriorityQueue<Process> tempQueue = new PriorityQueue(new hprnComparator());
-                    while(!readyQueue.isEmpty()){
-                        Process p = readyQueue.poll();
-                        p.hprn = getHPRN(time, p);
-                        tempQueue.offer(p);
+
+                    if(!currTerminated){
+
+                      PriorityQueue<Process> tempQueue = new PriorityQueue(new hprnComparator());
+
+                      while(!readyQueue.isEmpty()){
+                          Process p = readyQueue.poll();
+                          p.hprn = getHPRN(time, p);
+                          tempQueue.offer(p);
+                      }
+                      readyQueue = tempQueue;
                     }
-                    readyQueue = tempQueue;
 
                     curr = readyQueue.poll();
                     curr.state = State.running;

@@ -50,7 +50,7 @@ public class FCFS {
         int unutilizedIO = 0;
         while(terminatedCount < numProcesses){
             if(verbose){
-                System.out.print("Before Cycle: " + time);
+              System.out.print("Before Cycle " + time + ": ");
                 for(Process p : processList){
                     System.out.print( " " + p.state + " ");
                     if(p.state == State.blocked){

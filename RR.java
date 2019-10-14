@@ -54,13 +54,13 @@ public class RR {
         while(terminatedCount < numProcesses){
 
             if(verbose){
-                System.out.print("Before Cycle: " + time);
+              System.out.print("Before Cycle " + time + ": ");
                 for(Process p : processList){
                     System.out.print( " " + p.state + " ");
                     if(p.state == State.blocked){
                         System.out.print(p.ioTime + " ");
                     }else if(p.state == State.running){
-                        System.out.print(p.quantum + " ");
+                        System.out.print(Math.min(p.cpuBurst,p.quantum) + " ");
                     } else{
                         System.out.print(0 + " ");
                     }

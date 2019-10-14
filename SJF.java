@@ -24,7 +24,7 @@ public class SJF {
         System.out.println();
 
 
-        Collections.sort(processList, new fcfsComparator());
+        Collections.sort(processList, new SJFComparatorList());
 
         for(int i = 0 ; i < processList.size(); i ++){
             this.processList.get(i).index = i;
@@ -49,7 +49,7 @@ public class SJF {
 
         while(terminatedCount < numProcesses){
             if(verbose){
-                System.out.print("Before Cycle: " + time);
+                System.out.print("Before Cycle " + time + ": ");
                 for(Process p : processList){
                     System.out.print( " " + p.state + " ");
                     if(p.state == State.blocked){
@@ -193,6 +193,21 @@ class SJFComparator implements Comparator<Process>{
             }
         }else{
             return p1.cpuTotal.compareTo(p2.cpuTotal);
+        }
+
+    }
+}
+
+class SJFComparatorList implements Comparator<Process>{
+    public int compare(Process p1, Process p2){
+        if(p1.queueArrival.compareTo(p2.queueArrival) == 0){
+            if(p1.cpuTotal.compareTo(p2.cpuTotal) == 0){
+                return p1.index.compareTo(p2.index);
+            }else{
+                return p1.cpuTotal.compareTo(p2.cpuTotal);
+            }
+        }else{
+            return p1.queueArrival.compareTo(p2.queueArrival);
         }
 
     }
