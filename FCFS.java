@@ -17,7 +17,7 @@ public class FCFS {
         this.verbose = verbose;
 
         System.out.print("The original input was: ");
-        System.out.print(processList.size());
+        System.out.print(processList.size() + " ");
         for(Process p : processList){
             System.out.print( "(" + p.arrival + " " + p.cpuRandom + " " + p.cpuTotal + " " + p.ioMulti  + ") ");
         }

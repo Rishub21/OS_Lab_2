@@ -17,7 +17,7 @@ public class HPRN {
         this.verbose = verbose;
 
         System.out.print("The original input was: ");
-        System.out.print(processList.size());
+        System.out.print(processList.size() + " ");
         for(Process p : processList){
             System.out.print( "(" + p.arrival + " " + p.cpuRandom + " " + p.cpuTotal + " " + p.ioMulti  + ") ");
         }
@@ -45,6 +45,7 @@ public class HPRN {
         int unutilized = 0;
         int unutilizedIO = 0;
         while(terminatedCount < numProcesses){
+          boolean burstTerminated = false;
             if(verbose){
               System.out.print("Before Cycle " + time + ": ");
                 for(Process p : processList){
@@ -66,7 +67,7 @@ public class HPRN {
                 p.ioTime --;
                 if(p.ioTime == 0){
                     p.state = State.ready;
-
+                    burstTerminated = true;
                     p.queueArrival = time;
                     p.hprn = getHPRN(time, p);
                     readyQueue.offer(p);
@@ -78,7 +79,7 @@ public class HPRN {
             blockedSet = newBlockedSet;
 
             boolean hasCurr = false;
-            boolean currTerminated= false;
+            //boolean currTerminated= false;
             if(curr != null){
                 hasCurr = true;
                 curr.cpuBurst -= 1;
@@ -87,10 +88,11 @@ public class HPRN {
 
                     curr.state = State.terminated;
                     curr.finishingTime = time;
-                    currTerminated = true;
+                    //currTerminated = true;
                     terminatedCount ++;
                     curr = null;
                 }else if(curr.cpuBurst == 0 ){
+                    burstTerminated = true;
                     curr.state = State.blocked;
 
                     curr.ioTime = curr.ioMulti * curr.prevCPUBurst;
@@ -116,20 +118,26 @@ public class HPRN {
             if(curr == null){
 
                 if(readyQueue.size() > 0){
-
-
-
-                    if(!currTerminated){
+                    if(burstTerminated){
 
                       PriorityQueue<Process> tempQueue = new PriorityQueue(new hprnComparator());
 
                       while(!readyQueue.isEmpty()){
                           Process p = readyQueue.poll();
                           p.hprn = getHPRN(time, p);
+
                           tempQueue.offer(p);
                       }
                       readyQueue = tempQueue;
                     }
+
+
+
+                    // if(time < 1000){
+                    //   System.out.println("Process " + readyQueue.peek().index + " : "+ readyQueue.peek().hprn);
+                    //   System.out.println("Process  " + processList.get(1).index + ": " +   processList.get(1).hprn);
+                    //
+                    // }
 
                     curr = readyQueue.poll();
                     curr.state = State.running;
@@ -150,6 +158,10 @@ public class HPRN {
                     unutilized ++;
                 }
             }
+
+            // for(Process p : processList){
+            //   System.out.println("Process " +p.index + " "+p.hprn);
+            // }
             time ++;
         }
         System.out.println("The scheduling algorithm used was Highest Penalty Ratio Next \n");
@@ -196,7 +208,7 @@ public class HPRN {
     }
 
     public Float getHPRN(int time, Process p){
-       int num = 1+(time - p.arrival);
+       int num = (time - p.arrival);
        float denom = Math.max(1,p.originalCPUTotal - p.cpuTotal);
 
        return num / denom;
@@ -207,10 +219,10 @@ public class HPRN {
 class hprnComparator implements Comparator<Process>{
     public int compare(Process p1, Process p2){
         if(p1.hprn.compareTo(p2.hprn) == 0){
-            if(p1.queueArrival.compareTo(p2.queueArrival) == 0){
+            if(p1.arrival.compareTo(p2.arrival) == 0){
                 return p1.index.compareTo(p2.index);
             }else{
-                return p1.queueArrival.compareTo(p2.queueArrival);
+                return p1.arrival.compareTo(p2.arrival);
             }
         }else{
             return -1 * (p1.hprn.compareTo(p2.hprn));
