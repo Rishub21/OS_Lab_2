@@ -3,7 +3,9 @@
 ## Instructions 
 
 1) Please cd into the folder 
-2) Please run ```javac Solution.java``` 
+
+2) Please run ```javac Solution.java``` . Please ignore any Notes that come up about recompiling with xlint. This does not affect the program 
+
 3) Please run either 
 
    a) ```java Solution input.txt```   
