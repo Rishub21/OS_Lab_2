@@ -34,15 +34,15 @@ public class Solution {
             processList.add(p);
         }
 
-        // FCFS f = new FCFS(getDeepClone(processList), verbose);
-        // f.Schedule();
-        //
-        // RR r = new RR(getDeepClone(processList), verbose);
-        // r.Schedule();
-        //
-        // SJF s = new SJF(getDeepClone(processList), verbose);
-        // s.Schedule();
+        FCFS f = new FCFS(getDeepClone(processList), verbose);
+        f.Schedule();
 
+        RR r = new RR(getDeepClone(processList), verbose);
+        r.Schedule();
+
+        SJF s = new SJF(getDeepClone(processList), verbose);
+        s.Schedule();
+                
         HPRN h = new HPRN(getDeepClone(processList), verbose);
         h.Schedule();
     }

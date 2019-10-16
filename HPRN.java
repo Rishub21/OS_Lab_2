@@ -130,15 +130,6 @@ public class HPRN {
                       }
                       readyQueue = tempQueue;
                     }
-
-
-
-                    // if(time < 1000){
-                    //   System.out.println("Process " + readyQueue.peek().index + " : "+ readyQueue.peek().hprn);
-                    //   System.out.println("Process  " + processList.get(1).index + ": " +   processList.get(1).hprn);
-                    //
-                    // }
-
                     curr = readyQueue.poll();
                     curr.state = State.running;
 
@@ -159,9 +150,7 @@ public class HPRN {
                 }
             }
 
-            // for(Process p : processList){
-            //   System.out.println("Process " +p.index + " "+p.hprn);
-            // }
+
             time ++;
         }
         System.out.println("The scheduling algorithm used was Highest Penalty Ratio Next \n");

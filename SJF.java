@@ -200,14 +200,14 @@ class SJFComparator implements Comparator<Process>{
 
 class SJFComparatorList implements Comparator<Process>{
     public int compare(Process p1, Process p2){
-        if(p1.queueArrival.compareTo(p2.queueArrival) == 0){
+        if(p1.arrival.compareTo(p2.arrival) == 0){
             if(p1.cpuTotal.compareTo(p2.cpuTotal) == 0){
                 return p1.index.compareTo(p2.index);
             }else{
                 return p1.cpuTotal.compareTo(p2.cpuTotal);
             }
         }else{
-            return p1.queueArrival.compareTo(p2.queueArrival);
+            return p1.arrival.compareTo(p2.arrival);
         }
 
     }
