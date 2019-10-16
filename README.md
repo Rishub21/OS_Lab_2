@@ -13,7 +13,8 @@
    Where input.txt is any txt file inside the directory at the root level that follows the specification of input in the lab specs. This will give the basic simulation output for each scheduling algorithm. 
  
    **Note** I have inlcluded sample input.txt files labeled input1.txt, input2.txt etc. As such, if you want to use different inputs, please name them differently  
-   **Note** Please do **NOT** use paranthesis in the input format. Professor did mention in the comments this was a choice we could make and as such I did not build in paranthesis parsing. 
+   
+   **Note** Please do **NOT** use parenthesis in the input format. Professor did mention in the comments this was a choice we could make and as such I did not build in parenthesis parsing. 
    
    b) ``` java Solution --verbose input.txt```  
    
